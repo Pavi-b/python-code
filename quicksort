@@ -1,0 +1,24 @@
+def partition(a,lb,ub):
+    pivot=a[lb]
+    start=lb
+    end=ub
+    while(start<=end):
+        while a[start] <= pivot:
+          start+=1
+        while a[end]> pivot:
+          end-=1
+        if start<end:
+          a[start],a[end]=a[end],a[start]
+    a[end],a[lb]=a[lb],a[end]
+    return end
+def quicksort(a,lb,ub):
+   if lb<ub:
+     location=partition(a,lb,ub)
+     quicksort(a,lb,location-1)
+     quicksort(a,location+1,ub)
+
+a=[5,6,10,5,9,2,1,9]
+lb=0
+ub=len(a)-1
+quicksort(a,lb,ub) 
+print(a)     
