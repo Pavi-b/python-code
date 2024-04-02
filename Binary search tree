@@ -1,0 +1,69 @@
+class TreeNode:
+    def __init__(self, key):
+        self.val = key
+        self.left = None
+        self.right = None
+
+def insert(root, key):
+    if root is None:
+        return TreeNode(key)
+    else:
+        if key < root.val:
+            root.left = insert(root.left, key)
+        else:
+            root.right = insert(root.right, key)
+    return root
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val, end=" ")
+        inorder(root.right)
+
+def delete_leaf(root, key, parent=None):
+    if root is None:
+        return root
+    if key < root.val:
+        root.left = delete_leaf(root.left, key, root)
+    elif key > root.val:
+        root.right = delete_leaf(root.right, key, root)
+    else:
+        if root.left is None and root.right is None:
+            if parent is None:
+                return None
+            if parent.left == root:
+                parent.left = None
+            else:
+                parent.right = None
+            root = None
+    return root
+
+def deletewithonechildnode(root,key):
+    if root is None:
+        return root
+    parent=None
+    current=root
+    while current and current.val!=key:
+        parent=current
+        if key< current.val:
+            current=current.left
+        else:
+            current=current.right
+        if current.left is None:
+           if parent is None:
+              return current.right
+           if parent.left == current:
+              parent.left = current.right
+           else:
+              parent.right = current.right
+        current = None
+
+
+root = None
+keys = [50, 30, 70, 20, 40, 60, 80, 7]
+for key in keys:
+    root = insert(root, key)
+inorder(root)
+print()
+root = delete_leaf(root, 7)
+inorder(root)
