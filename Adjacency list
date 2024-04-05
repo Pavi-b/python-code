@@ -1,0 +1,35 @@
+class adjnode:
+    def __init__(self,value):
+        self.vertex=value
+        self.next=None
+class graph:
+    def __init__(self,num):
+        self.v=num
+        self.graph=[None]*self.v
+
+    def add_edge(self,s,d):
+        node=adjnode(d)
+        self.next=self.graph[s]
+        self.graph[s]=None
+        node=adjnode(s)
+        node.next=self.graph[d]
+        self.graph[d]=node
+
+    def printgraph(self):
+        for i in range(self.v):
+            print("vertex " + str(i) + ":", end="")
+            temp=self.graph[i]
+            while temp:
+                print(" -> {}".format(temp.vertex), end="")
+                temp=temp.next
+            print()
+
+if __name__ == "__main__":
+    v = 5
+    graph=graph(v)
+    graph.add_edge(0, 1)
+    graph.add_edge(1,0)
+    graph.add_edge(0, 2)
+    graph.add_edge(0, 3)
+    graph.add_edge(1, 2)
+    graph.printgraph()
