@@ -1,0 +1,26 @@
+class graph:
+    def __init__(self,size):
+        self.adjmatrix=[]
+        for i in range(size):
+            self.adjmatrix.append([0 for i in range(size)])
+        self.size = size
+
+    def add_edge(self,v1,v2):
+        if v1==v2:
+            print("same vertex %d and %d,"(v1,v2))
+        self.adjmatrix[v1][v2]=1
+        self.adjmatrix[v2][v1]=1
+
+    def printadjmatrix(self):
+        for row in self.adjmatrix:
+            for val in row:
+                print('{:4}'.format(val))
+            print
+def main():
+    g=graph(5)
+    g.add_edge(0, 1)
+    g.add_edge(0, 2)
+    g.add_edge(1, 2)
+    g.add_edge(2, 0)
+    g.add_edge(2, 3)
+    g.printadjmatrix()
