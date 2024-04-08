@@ -1,0 +1,16 @@
+def dfs(a,node,val):
+    if node is not val:
+        val.append(node)
+        for k in a[node]:
+            dfs(a,k,val)
+    return val
+a={}
+n=int(input())
+for i in range(n-1):
+    s=input()
+    d=input()
+    a[s]=d
+b=input()
+val=[]
+res=dfs(a,b,val)
+print(res)
