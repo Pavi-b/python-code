@@ -1,0 +1,22 @@
+def djkstra(graph,start_vertex):
+    distances={}
+    for vertex in graph:
+        distances[vertex]=float('infinity')
+    distances[start_vertex]=0
+    priority_queue=[]
+    priority_queue.append((0,start_vertex))
+    visited=set()
+    while priority_queue:
+        priority_queue.sort(key=lambda x:x[0])
+        current_distance,current_vertex=priority_queue.pop(0)
+        visited.add(current_vertex)
+        for neighbor,weight in graph[current_vertex].items():
+            if neighbor in visited:
+                continue
+            new_distance=current_distance+vertex
+            if new_distance<distances[neighbor]:
+                distances[neighbor]=new_distance
+                priority_queue.append((new_distance,neighbor))
+    return distances
+
+
